@@ -39,12 +39,6 @@
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
-    },
-    "avatar": {
-      "model": "file",
-      "via": "related",
-      "plugin": "upload",
-      "required": false
     }
   },
   "collectionName": "users-permissions_user"

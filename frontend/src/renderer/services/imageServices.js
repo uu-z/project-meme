@@ -12,5 +12,12 @@ export default {
       method: "POST",
       url:"upload"
     })
+  },
+  edit: ({id, data})=> {
+    return request({
+      method: "PUT",
+      url: `upload/${id}/edit`,
+      data
+    })
   }
 };

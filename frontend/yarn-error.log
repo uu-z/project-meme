@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\ncysa\scoop\apps\yarn\current\Yarn\bin\yarn.js start
+  C:\Program Files\nodejs\node.exe C:\Users\ncysa\scoop\apps\yarn\current\Yarn\bin\yarn.js dev
 
 PATH: 
   C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\libnvvp;C:\Program Files\Docker\Docker\Resources\bin;C:\Python37\Scripts\;C:\Python37\;C:\Python27\;C:\Python27\Scripts;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\Seagate\SnapAPI\;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Program Files\OpenSSH\bin;C:\Go\bin;C:\Program Files\TortoiseGit\bin;C:\Program Files\nodejs\;C:\Program Files\Microsoft VS Code\bin;C:\Users\ncysa\Anaconda3;C:\Users\ncysa\Anaconda3\Library\mingw-w64\bin;C:\Users\ncysa\Anaconda3\Library\usr\bin;C:\Users\ncysa\Anaconda3\Library\bin;C:\Users\ncysa\Anaconda3\Scripts;C:\Users\ncysa\.cargo\bin;C:\Users\ncysa\scoop\apps\yarn\current\Yarn\bin;C:\Users\ncysa\scoop\apps\yarn\current\bin;C:\Users\ncysa\scoop\shims;C:\Users\ncysa\AppData\Local\Micr;C:\Program Files\NVIDIA Corporation\NVIDIA NGX;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\ncysa\Anaconda3;C:\Users\ncysa\Anaconda3\Library\mingw-w64\bin;C:\Users\ncysa\Anaconda3\Library\usr\bin;C:\Users\ncysa\Anaconda3\Library\bin;C:\Users\ncysa\Anaconda3\Scripts;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\Seagate\SnapAPI\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Program Files\OpenSSH\bin;C:\Go\bin;C:\Program Files\TortoiseGit\bin;C:\Users\ncysa\.cargo\bin;C:\Users\ncysa\scoop\apps\yarn\current\Yarn\bin;C:\Users\ncysa\scoop\apps\yarn\current\bin;C:\Users\ncysa\scoop\shims;C:\Users\ncysa\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Docker Toolbox;C:\Program Files\Docker Toolbox;C:\Program Files (x86)\Common Files\Acronis\TibMounter64;C:\Python27\;C:\Python27\Scripts\;C:\Users\ncysa\AppData\Roaming\npm;C:\Program Files (x86)\Nmap;C:\Program Files\Docker Toolbox;C:\Users\ncysa\AppData\Local\hyper\app-2.0.0\resources\bin
@@ -15,7 +15,7 @@ Platform:
 
 npm manifest: 
   {
-    "name": "crawl",
+    "name": "frontend",
     "version": "0.0.0",
     "author": "cirnoo <ncysatnaf@gmail.com>",
     "description": "An electron-vue project",
@@ -77,7 +77,7 @@ npm manifest:
       "add": "^2.0.6",
       "axios": "^0.16.1",
       "cheerio": "^1.0.0-rc.2",
-      "iview": "^2.14.2",
+      "iview": "^3.1.3",
       "koa": "^2.5.2",
       "koa-bodyparser": "^4.2.1",
       "koa-router": "^7.4.0",
@@ -7770,14 +7770,16 @@ Lockfile:
     resolved "http://registry.npm.taobao.org/ylru/download/ylru-1.2.1.tgz#f576b63341547989c1de7ba288760923b27fe84f"
 
 Trace: 
-  Error: Command "start" not found.
-      at new MessageError (C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:186:110)
-      at C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:87307:17
-      at Generator.next (<anonymous>)
-      at step (C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:98:30)
-      at C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:116:14
-      at new Promise (<anonymous>)
-      at new F (C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:23451:28)
-      at C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:95:12
-      at runCommand (C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:87312:22)
-      at Object.<anonymous> (C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:87412:14)
+  Error: Command failed.
+  Exit code: 3221225786
+  Command: C:\Windows\system32\cmd.exe
+  Arguments: /d /s /c node .electron-vue/dev-runner.js
+  Directory: C:\Users\ncysa\Desktop\Proejct\project-meme\frontend
+  Output:
+  
+      at ProcessTermError.MessageError (C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Users\ncysa\scoop\apps\yarn\1.5.1\Yarn\lib\cli.js:30281:17)
+      at ChildProcess.emit (events.js:182:13)
+      at maybeClose (internal/child_process.js:957:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:246:5)

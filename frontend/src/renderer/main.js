@@ -9,7 +9,6 @@ import iView from 'iview';
 
 import Viewer from 'v-viewer'
 import vueWaterfallEasy from 'vue-waterfall-easy'
-import VueUploadComponent  from "vue-upload-component"
 
 
 const Plugins = {
@@ -18,7 +17,6 @@ const Plugins = {
 
 const Components = {
   vueWaterfallEasy,
-  "file-upload": VueUploadComponent,
   ...components
 }
 

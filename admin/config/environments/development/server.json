@@ -2,13 +2,15 @@
   "host": "localhost",
   "port": 1337,
   "proxy": {
-    "enabled": false
+    "enabled": false,
+    "host": "localhost",
+    "port": 1336
   },
   "autoReload": {
     "enabled": true
   },
   "cron": {
-    "enabled": false
+    "enabled": true
   },
   "admin": {
     "autoOpen": true

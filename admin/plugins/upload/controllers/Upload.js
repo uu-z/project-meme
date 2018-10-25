@@ -167,8 +167,13 @@ module.exports = {
     ctx.send(data);
   },
   update: async(ctx) => {
-    const data = await strapi.plugins['upload'].services.upload.edit(ctx.params,  ctx.request.body);
+    const file = await strapi.plugins['upload'].services.upload.edit(ctx.params,  ctx.request.body);
 
-    ctx.send(data)
+    if (file.url[0] === '/') {
+      file.url = strapi.config.url + file.url;
+    }
+
+    ctx.send(file)
+
   }
 };

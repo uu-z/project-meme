@@ -1,3 +1,4 @@
+import Vue from "vue"
 import _ from "lodash";
 import {imageServices} from "../services"
 
@@ -30,9 +31,8 @@ const actions = {
   },
   async EDIT_IMAGE({dispatch, commit, state}, {id, data}){
     const result = await imageServices.edit({id, data})
-    const {_id} = result
-    commit("ASSIGN_STATE", {
-      images: _.unionBy([result], state.images, "_id")
+    commit("CUSTOM", state => {
+      state.images = state.images.map(image => image._id == result._id ? result : image)
     })
   }
 };

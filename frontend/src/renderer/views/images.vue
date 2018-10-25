@@ -9,16 +9,15 @@
         Icon(type="ios-cloud-upload" size="52" style="color: #3399ff")
         p Click or drag files here to upload
       div(slot="footer")
-    //- Modal(v-model="editModal")
-    //-   Form(:="currentSelectImage")
-    //-     FormItem(label="标签")
-    //-       Tag(v-for="item in currentSelectImage.tags", :key="item", :name="item", closeable @on-close="handleTagClose") {{item}}
+    Modal(v-model="editModal" @on-ok="onSubmitEdit")
+      //- p.img-text {{currentSelectImage.name}}
+      Tag.img-tag(v-for="item in currentSelectImage.tags", :key="item", :name="item", closable, @on-close="handleCloseTag(item)") {{item}}
+      Button(v-if="!currentSelectImage.isAddTag" icon="ios-add" type="dashed" size="small" @click="$set(currentSelectImage, 'isAddTag', true)") 添加标签
+      Input(v-if="currentSelectImage.isAddTag" size="small" autofocus style="width: 60px" @on-change="e => {currentSelectImage.addTagText = e.target.value}" @on-enter="handleInputTag()" @on-blur="handleInputTag()")
     div.waterfall-box
       vue-waterfall-easy(:maxCols="5" :imgsArr="images" srcKey="url" @scrollReachBottom="loadImage" @click="clickFn")
-        .img-info(slot-scope="props")
-          //- p.img-text {{props.value.name}}
-          Tag.img-tag(v-for="item in props.value.tags", :key="item", :name="item", closable, @on-close="handleTagClose") {{item}}
-          Button(icon="ios-add" type="dashed" size="small" @click="handleAdd") 添加标签
+        //- .img-info(slot-scope="props")
+         
 </template>
 
 <script>
@@ -32,7 +31,11 @@ export default {
       files: null,
       uploadModal: false,
       editModal: false,
-      currentSelectImage: {}
+      currentSelectImage: {
+        tags:[],
+        addTagText: "",
+        isAddTag: false
+      }
     };
   },
   watch: {
@@ -43,11 +46,23 @@ export default {
   computed:{
     images(){
       return store.state.images
-    },
+    }
   },
   methods: {
-    handleTagClose(e, name){
-
+    async onSubmitEdit(){
+      const data = _.pick(this.currentSelectImage, ["tags"])
+      await store.dispatch("EDIT_IMAGE", {
+        id: this.currentSelectImage.id,
+        data
+      })
+    },
+    handleCloseTag(tag){
+      this.currentSelectImage.tags = [..._.pull(this.currentSelectImage.tags,tag)]
+    },
+    handleInputTag(){
+      if(!this.currentSelectImage.addTagText) return
+      this.currentSelectImage.isAddTag = false
+      this.currentSelectImage.tags = [...this.currentSelectImage.tags || [], this.currentSelectImage.addTagText]
     },
     async uploadSuccess(){
       store.dispatch("GET_IMAGES")

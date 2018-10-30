@@ -4,7 +4,7 @@ import {imageServices} from "../services"
 
 const state = {
   apiRoot: "http://localhost:1337",
-  list: {
+  lists: {
     images:{
       _sort: "createdAt:desc",
       _limit: 30,
@@ -32,8 +32,8 @@ const mutations = {
 const actions = {
   async INIT_APP({ dispatch, commit }) {},
   async GET_IMAGES({dispatch, commit, state}){
-    const _start = state.list.images.list.length
-    const {_limit, _sort} = state.list.images
+    const _start = state.lists.images.list.length
+    const {_limit, _sort} = state.lists.images
 
     const result = await imageServices.getFiles({
       params:{
@@ -43,14 +43,19 @@ const actions = {
       }
     })
     commit("CUSTOM", state =>{
-      const images = state.list.images
+      const images = state.lists.images
       images.list = [...images.list, ...result]
     })
   },
   async EDIT_IMAGE({dispatch, commit, state}, {id, data}){
     const result = await imageServices.edit({id, data})
     commit("CUSTOM", state => {
-      state.images = state.images.map(image => image._id == result._id ? result : image)
+      // state.lists.images.list = state.lists.images.list.map(image => image._id == result._id ? result : image)
+      state.lists.images.list.forEach((image, index) => {
+        if(image._id == result._id){
+          Object.assign(image, result)
+        }
+      })
     })
   }
 };

@@ -12,7 +12,7 @@
     Modal(v-model="editModal" @on-ok="onSubmitEdit")
       Tag.img-tag(v-for="item in currentSelectImage.tags", :key="item", :name="item", closable, @on-close="handleCloseTag(item)") {{item}}
       Button(v-if="!currentSelectImage.isAddTag" icon="ios-add" type="dashed" size="small" @click="$set(currentSelectImage, 'isAddTag', true)") 添加标签
-      Input(v-if="currentSelectImage.isAddTag" size="small" autofocus style="width: 60px" @on-change="e => {currentSelectImage.addTagText = e.target.value}" @on-enter="handleInputTag()" @on-blur="handleInputTag()")
+      Input(v-if="currentSelectImage.isAddTag" size="small" autofocus style="width: 60px" @on-change="e => {currentSelectImage.addTagText = e.target.value}" @on-enter="handleInputTag" @on-blur="handleInputTag")
     div.waterfall-box
       vue-waterfall-easy(:maxCols="5" :imgsArr="images.list" srcKey="url" @scrollReachBottom="loadImage" @click="clickFn")
 
@@ -46,7 +46,7 @@ export default {
   },
   computed:{
     images(){
-      return store.state.list.images
+      return store.state.lists.images
     }
   },
   methods: {
@@ -63,7 +63,7 @@ export default {
     handleInputTag(){
       if(!this.currentSelectImage.addTagText) return
       this.currentSelectImage.isAddTag = false
-      this.currentSelectImage.tags = [...this.currentSelectImage.tags || [], this.currentSelectImage.addTagText]
+      this.currentSelectImage.tags = _.uniq([...this.currentSelectImage.tags || [], this.currentSelectImage.addTagText])
     },
     async uploadSuccess(){
     },

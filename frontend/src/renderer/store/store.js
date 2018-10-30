@@ -1,15 +1,17 @@
 import Vue from "vue"
 import _ from "lodash";
 import {imageServices} from "../services"
+import store from ".";
 
 const state = {
   apiRoot: "http://localhost:1337",
-  lists: {
-    images:{
-      _sort: "createdAt:desc",
-      _limit: 30,
-      list: []
-    }
+  images: {
+    _sort: "createdAt:desc",
+    _limit: 30,
+    _query: {
+      tags_contains: null
+    },
+    list: []
   } 
 };
 
@@ -32,32 +34,33 @@ const mutations = {
 const actions = {
   async INIT_APP({ dispatch, commit }) {},
   async GET_IMAGES({dispatch, commit, state}){
-    const _start = state.lists.images.list.length
-    const {_limit, _sort} = state.lists.images
+    const _start = state.images.list.length
+    const {_limit, _sort, _query} = state.images
+
+    const params = {
+      _sort,
+      _start,
+      _limit,
+      ..._query
+    }
 
     const result = await imageServices.getFiles({
-      params:{
-        _sort,
-        _start,
-        _limit
-      }
+      params
     })
-    commit("CUSTOM", state =>{
-      const images = state.lists.images
-      images.list = [...images.list, ...result]
+    store.commit("CUSTOM", state =>{
+      state.images.list = [...state.images.list, ...result]
     })
   },
-  async EDIT_IMAGE({dispatch, commit, state}, {id, data}){
+  async EDIT_IMAGE({dispatch, commit, state}, { id, data}){
     const result = await imageServices.edit({id, data})
     commit("CUSTOM", state => {
-      // state.lists.images.list = state.lists.images.list.map(image => image._id == result._id ? result : image)
-      state.lists.images.list.forEach((image, index) => {
+      state.images.list.forEach((image, index) => {
         if(image._id == result._id){
           Object.assign(image, result)
         }
       })
     })
-  }
+  },
 };
 
 export default {

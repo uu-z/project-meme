@@ -2,9 +2,10 @@ import { request } from "../utils";
 import store from "../store";
 
 export default {
-  getFiles: () => {
+  getFiles: ({params}) => {
     return request({
       url: "upload/files",
+      params
     });
   },
   upload: ()=> {

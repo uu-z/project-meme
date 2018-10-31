@@ -1,5 +1,15 @@
-version: '3'
+version: "3"
 services:
+  frontend:
+    image: nginx
+    volumes:
+      - ./frontend/dist/web:/usr/share/nginx/html
+    ports:
+      - "2333:80"
+    labels:
+      - traefik.frontend.rule=Host:meme.yuyuko.me
+      - traefik.docker.network=traefik_proxy
+      - traefik.port=2333
   api:
     image: strapi/strapi
     environment:
@@ -12,9 +22,9 @@ services:
       - DATABASE_PASSWORD=
       - HOST=localhost
     ports:
-      - '1337:1337'
+      - "1337:1337"
     volumes:
-      - './admin:/usr/src/api/strapi-app'
+      - "./admin:/usr/src/api/strapi-app"
     depends_on:
       - db
     restart: always
@@ -23,9 +33,9 @@ services:
     environment:
       - MONGO_INITDB_DATABASE=strapi
     ports:
-      - '27017:27017'
+      - "27017:27017"
     volumes:
-      - 'db-data:/data/db'
+      - "db-data:/data/db"
     restart: always
 volumes:
   db-data: null

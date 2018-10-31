@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-import components from "./components"
 
 import axios from 'axios'
 import iView from 'iview';
@@ -16,8 +15,7 @@ const Plugins = {
 }
 
 const Components = {
-  vueWaterfallEasy,
-  ...components
+  vueWaterfallEasy
 }
 
 for (let [key, value] of Object.entries(Components)) {

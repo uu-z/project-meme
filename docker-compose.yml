@@ -23,7 +23,6 @@ services:
       - DATABASE_NAME=strapi
       - DATABASE_USERNAME=
       - DATABASE_PASSWORD=
-      - NODE_ENV=production
     ports:
       - "1337:1337"
     networks: 

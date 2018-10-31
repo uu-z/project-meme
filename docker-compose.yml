@@ -6,10 +6,13 @@ services:
       - ./frontend/dist/web:/usr/share/nginx/html
     ports:
       - "2333:80"
+    networks: 
+      - proxy
     labels:
+      - traefik.backend=frontend
       - traefik.frontend.rule=Host:meme.yuyuko.me
-      - traefik.docker.network=traefik_proxy
-      - traefik.port=2333
+      - traefik.docker.network=proxy
+      - traefik.port=80
   api:
     image: strapi/strapi
     environment:
@@ -20,9 +23,16 @@ services:
       - DATABASE_NAME=strapi
       - DATABASE_USERNAME=
       - DATABASE_PASSWORD=
-      - HOST=localhost
+      - NODE_ENV=production
     ports:
       - "1337:1337"
+    networks: 
+      - proxy
+    labels:
+      - traefik.backend=api
+      - traefik.frontend.rule=Host:api.yuyuko.me
+      - traefik.docker.network=proxy
+      - traefik.port=1337
     volumes:
       - "./admin:/usr/src/api/strapi-app"
     depends_on:
@@ -34,8 +44,14 @@ services:
       - MONGO_INITDB_DATABASE=strapi
     ports:
       - "27017:27017"
+    networks: 
+      - proxy
     volumes:
       - "db-data:/data/db"
     restart: always
 volumes:
   db-data: null
+networks: 
+  proxy:
+    external: 
+      name: tokyo2-proxy_proxy

@@ -8,6 +8,8 @@ services:
       - "2333:80"
     networks: 
       - proxy
+    depends_on:
+      - api
     labels:
       - traefik.backend=frontend
       - traefik.frontend.rule=Host:meme.yuyuko.me

@@ -16,10 +16,7 @@ jobs:
       - run:
           name: Deploying
           command: |
-            ssh root@202.182.107.46;
-            cd /var/app/project-meme/;
-            git clone;
-            docker down; docker up -d
+            ssh root@202.182.107.46 'cd /var/app/project-meme/; git clone; docker down; docker up -d'
 
 workflows:
   version: 2

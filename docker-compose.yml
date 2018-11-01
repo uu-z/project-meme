@@ -33,7 +33,7 @@ services:
       - proxy
     labels:
       - traefik.enable=true    
-      - traefik.backend=api
+      - traefik.backend=strapi
       - traefik.frontend.rule=Host:api.yuyuko.me
       - traefik.docker.network=proxy
       - traefik.port=1337

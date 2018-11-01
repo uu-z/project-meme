@@ -26,7 +26,6 @@ services:
       - DATABASE_USERNAME=
       - DATABASE_PASSWORD=
       - NODE_ENV=production
-      - PORT=
     ports:
       - "1337:1337"
     networks: 

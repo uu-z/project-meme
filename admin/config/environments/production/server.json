@@ -1,6 +1,6 @@
 {
   "host": "api.yuyuko.me",
-  "port": "${process.env.PORT || 1337}",
+  "port": "",
   "proxy": {
     "enabled": false
   },

@@ -57,5 +57,4 @@ volumes:
   db-data: null
 networks: 
   proxy:
-    external: 
-      name: proxy_proxy
+    external: true

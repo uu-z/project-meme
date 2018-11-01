@@ -3,7 +3,7 @@ services:
   frontend:
     image: nginx
     volumes:
-      - ./frontend/dist/web:/usr/share/nginx/html
+      - ./poi/dist:/usr/share/nginx/html
     ports:
       - "2333:80"
     networks: 

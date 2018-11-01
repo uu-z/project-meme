@@ -11,6 +11,6 @@
     "enabled": false
   },
   "admin": {
-    "path": "/dashboard"
+    "path": "/admin"
   }
 }

@@ -1,5 +1,6 @@
 <template lang="pug">
   div
+    BackTop()
     Modal(v-model="uploadModal" :footer-hide="true")
       Upload(multiple name="files" type="drag" :action="uploadUrl")
         div(style="padding: 50px 0")

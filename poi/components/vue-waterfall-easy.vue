@@ -6,13 +6,13 @@
   width: 100%;
   height: 100%;
   position: relative;
+  // overflow-x: hidden;
+  // overflow-y: scroll;
+  // -webkit-overflow-scrolling: touch;
   .vue-waterfall-easy-scroll {
     position: relative;
     width: 100%;
     height: 100%;
-    // overflow-x: hidden;
-    // overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
   }
   .vue-waterfall-easy {
     position: absolute;
@@ -111,12 +111,12 @@
 
 <!-- —————————————↓HTML————————分界线———————————————————————— -->
 <template lang="pug">
-.vue-waterfall-easy-container(:style="{width: width&&!isMobile ? width+'px' : '', height: parseFloat(height)==height ? height+'px': height }")
+.vue-waterfall-easy-container(ref="scrollEl"  :style="{width: width&&!isMobile ? width+'px' : '', height: parseFloat(height)==height ? height+'px': height }")
   .loading.ball-beat(v-show="isPreloading_c", :class="{first:isFirstLoad}")
     slot(name="loading", :isFirstLoad="isFirstLoad")
     .dot(v-if="!hasLoadingSlot", v-for="n in loadingDotCount",:style="loadingDotStyle")
   //- 为了防止loading 跟随滚动
-  .vue-waterfall-easy-scroll(ref="scrollEl" :style="isMobile? '' :{width: colWidth*cols+'px',left:'50%', marginLeft: -1*colWidth*cols/2 +'px'}")
+  .vue-waterfall-easy-scroll(:style="isMobile? '' :{width: colWidth*cols+'px',left:'50%', marginLeft: -1*colWidth*cols/2 +'px'}")
     slot(name="waterfall-head")
     .vue-waterfall-easy()
       .img-box(
@@ -154,7 +154,7 @@ export default {
     },
     reachBottomDistance: { // 滚动触底距离，触发加载新图片
       type: Number, // selector
-      default: 20  // 默认在最低那一列到底时触发
+      default: 500  // 默认在最低那一列到底时触发
     },
     loadingDotCount: { // loading 点数
       type: Number,
@@ -373,17 +373,24 @@ export default {
 
     // ==5== 滚动触底事件
     scrollFn() {
-      var scrollEl = this.$refs.scrollEl
-      if (this.isPreloading) return
-      var minHeight = Math.min.apply(null, this.colsHeightArr)
-      if (scrollEl.scrollTop + scrollEl.offsetHeight > minHeight - this.reachBottomDistance) {
-        this.isPreloading = true
-        // console.log('scrollReachBottom')
-        this.$emit('scrollReachBottom') // 滚动触底
+      if(window.pageYOffset >= this.reachBottomDistance){
+        // console.log(window.pageYOffset, this.reachBottomDistance)
+        this.reachBottomDistance += window.pageYOffset
+        this.$emit('scrollReachBottom')
       }
+      // var scrollEl = this.$refs.scrollEl
+      // if (this.isPreloading) return
+      // var minHeight = Math.min.apply(null, this.colsHeightArr)
+      // if (scrollEl.scrollTop + scrollEl.offsetHeight > minHeight - this.reachBottomDistance) {
+      //   this.isPreloading = true
+      //   // console.log('scrollReachBottom')
+      //   this.$emit('scrollReachBottom') // 滚动触底
+      // }
     },
     scroll() {
-      this.$refs.scrollEl.addEventListener('scroll', this.scrollFn)
+      // this.$refs.scrollEl.addEventListener('scroll', this.scrollFn)
+      window.addEventListener('scroll', this.scrollFn);
+      window.addEventListener('resize', this.scrollFn);
     },
     waterfallOver() {
       this.$refs.scrollEl.removeEventListener('scroll', this.scrollFn)

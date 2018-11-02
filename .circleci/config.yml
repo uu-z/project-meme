@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Deploying
           command: |
-            ssh root@202.182.107.46 'bash /var/app/project-meme/deploy.sh'
+            ssh root@202.182.107.46 'cd /var/app/project-meme/; git reset --hard; git pull --rebase; bash ./deploy.sh'
 
 workflows:
   version: 2

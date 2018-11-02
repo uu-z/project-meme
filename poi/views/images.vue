@@ -1,8 +1,5 @@
 <template lang="pug">
   div
-    Input(v-model="search" clearable @on-enter="handleSearch" @on-blur="handleSearch")
-      Button(slot="append" icon="md-search" @click="handleSearch" )
-      Button(slot="append" icon="md-add" @click="uploadModal = true")
     Modal(v-model="uploadModal")
       Upload(multiple name="files" type="drag" :action="uploadUrl")
         div(style="padding: 20px 0")
@@ -15,6 +12,13 @@
       Input(v-if="currentSelectImage.isAddTag" size="small" autofocus style="width: 60px" @on-change="e => {currentSelectImage.addTagText = e.target.value}" @on-enter="handleInputTag" @on-blur="handleInputTag")
     div.waterfall-box
       vue-waterfall-easy(:maxCols="5" ref="waterfall" :imgsArr="images.list" srcKey="url" @scrollReachBottom="getImages" @click="clickFn")
+        Affix(slot="waterfall-head" :offset-top="0")
+          Card
+            div(slot="title" :style="{display: 'flex', alignItems:'center'}")
+              p 二次元表情包
+              Input(v-model="search" clearable  @on-enter="handleSearch" @on-blur="handleSearch")
+              Button(icon="md-search" @click="handleSearch" )
+              Button(icon="md-add" @click="uploadModal = true")
 </template>
 
 <script>
@@ -44,7 +48,11 @@ export default {
     uploadUrl(){
       return `${store.state.apiRoot}/upload`
     },
-    ...mapObjs(["images"])
+    ...mapObjs(["images"]),
+    waterfallWidth(){
+      const {colWidth, cols} = this.$refs.waterfall
+      return colWidth*cols
+    }
   },
   methods: {
     async handleSearch() {
@@ -100,9 +108,12 @@ export default {
 </script>
 
 <style lang="stylus">
+.search {
+  display: flex;
+}
 .waterfall-box {
   position: absolute;
-  top: 100px;
+  top: 15px;
   bottom: 0;
   width: 100%;
 }

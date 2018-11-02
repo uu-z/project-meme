@@ -10,8 +10,8 @@
     position: relative;
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    // overflow-x: hidden;
+    // overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
   }
   .vue-waterfall-easy {
@@ -114,16 +114,17 @@
     slot(name="loading", :isFirstLoad="isFirstLoad")
     .dot(v-if="!hasLoadingSlot", v-for="n in loadingDotCount",:style="loadingDotStyle")
   //- 为了防止loading 跟随滚动
-  .vue-waterfall-easy-scroll(ref="scrollEl")
+  .vue-waterfall-easy-scroll(ref="scrollEl" :style="isMobile? '' :{width: colWidth*cols+'px',left:'50%', marginLeft: -1*colWidth*cols/2 +'px'}")
     slot(name="waterfall-head")
-    .vue-waterfall-easy(:style="isMobile? '' :{width: colWidth*cols+'px',left:'50%', marginLeft: -1*colWidth*cols/2 +'px'}")
+    .vue-waterfall-easy()
       .img-box(
         v-for="(v,i) in imgsArr_c",
         :class="[cardAnimationClass, {__err__: v._error}]"
         :style="{padding: (isMobile ? mobileGap : gap)/2+'px', width: isMobile ? '' : colWidth+'px'}"
       )
         component.img-inner-box(
-          :is="isRouterLink  && linkRange=='card' ? 'router-link' : 'a'",
+          :is="isRouterLink  && linkRange=='card' ? 'router-link' : 'Card'",
+          :padding=0
           :data-index="i",
           :to="linkRange=='card' ? v[hrefKey] : false")
           component.img-wraper(

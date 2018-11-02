@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Deploying
           command: |
-            ssh root@202.182.107.46 'cd /var/app/project-meme/;git reset --hard; git pull --rebase;docker-compose down; docker-compose up -d'
+            ssh root@202.182.107.46 'cd /var/app/project-meme/;bash ./deploy.sh'
 
 workflows:
   version: 2

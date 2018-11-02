@@ -4,7 +4,7 @@
       Button(slot="append" icon="md-search" @click="handleSearch" )
       Button(slot="append" icon="md-add" @click="uploadModal = true")
     Modal(v-model="uploadModal")
-      Upload(multiple name="files" type="drag" :action="uploadUrl" :on-success="uploadSuccess")
+      Upload(multiple name="files" type="drag" :action="uploadUrl")
         div(style="padding: 20px 0")
         Icon(type="ios-cloud-upload" size="52" style="color: #3399ff")
         p Click or drag files here to upload
@@ -75,13 +75,6 @@ export default {
         this.currentSelectImage.addTagText
       ]);
     },
-    uploadSuccess() {
-      this.images = {
-        list:[]
-      }
-      this.getImages()
-    },
-
     async clickFn(event, { index, value }) {
       this.currentSelectImage = { ...this.images.list[index] };
       global._E = event;

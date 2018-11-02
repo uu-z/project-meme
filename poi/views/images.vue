@@ -1,10 +1,10 @@
 <template lang="pug">
   div
-    Modal(v-model="uploadModal")
+    Modal(v-model="uploadModal" :footer-hide="true")
       Upload(multiple name="files" type="drag" :action="uploadUrl")
-        div(style="padding: 20px 0")
-        Icon(type="ios-cloud-upload" size="52" style="color: #3399ff")
-        p Click or drag files here to upload
+        div(style="padding: 50px 0")
+          Icon(type="ios-cloud-upload" size="52" style="color: #3399ff")
+          p Click or drag files here to upload
       div(slot="footer")
     Modal(v-model="editModal" @on-ok="onSubmitEdit")
       Tag.img-tag(v-for="item in currentSelectImage.tags", :key="item", :name="item", closable, @on-close="handleCloseTag(item)") {{item}}
@@ -12,6 +12,11 @@
       Input(v-if="currentSelectImage.isAddTag" size="small" autofocus style="width: 60px" @on-change="e => {currentSelectImage.addTagText = e.target.value}" @on-enter="handleInputTag" @on-blur="handleInputTag")
     div.waterfall-box
       vue-waterfall-easy(:maxCols="5" ref="waterfall" :imgsArr="images.list" srcKey="url" @scrollReachBottom="getImages" @click="clickFn")
+        div.img-info(slot-scope="props") 
+          p {{ props.value.tags? props.value.tags.join(",") : ""}}
+          //- div(:style="{display: 'flex', alignItems: 'center'}")
+          //-   Icon(type="ios-heart-outline" :size="20")
+          //-   span(:style="{'line-height': 1.5, 'margin-left': 5+'px',}") 0
         Affix(slot="waterfall-head" :offset-top="0")
           Card
             div(slot="title" :style="{display: 'flex', alignItems:'center'}")
@@ -124,5 +129,7 @@ export default {
 
 .img-info {
   padding: 10px;
+  font-size: 12px
+
 }
 </style>

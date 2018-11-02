@@ -56,6 +56,8 @@
         width: 100%;
         display: block;
         border: none;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
       }
     }
     .over {
@@ -131,7 +133,7 @@
             v-if="v[srcKey]",
             :is="isRouterLink && linkRange=='img' ? 'router-link' :'a'",
             :to="linkRange=='img' ? v[hrefKey] : false ",
-            :style="{width:imgWidth_c + 'px',height:v._height ? v._height+'px':false}")
+            :style="{height:v._height ? v._height+'px':false}")
             img(:src="v[srcKey]")
           slot(:index="i",:value="v")
       .over(v-if="over",ref="over")

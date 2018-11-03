@@ -2,15 +2,30 @@
   div
     BackTop()
     Modal(v-model="uploadModal" :footer-hide="true")
-      Upload(multiple name="files" type="drag" :action="uploadUrl")
-        div(style="padding: 50px 0")
-          Icon(type="ios-cloud-upload" size="52" style="color: #3399ff")
-          p Click or drag files here to upload
+      //- Upload(multiple name="files" type="drag" :action="uploadUrl")
+      //-   div(style="padding: 50px 0")
+      //-     Icon(type="ios-cloud-upload" size="52" style="color: #3399ff")
+      //-     p Click or drag files here to upload
+      uploader.uploader-example(:options="uploadOptions" :style="{width: '100%'}")
+        uploader-unsupport
+        uploader-drop
+          p Drop files here to upload
+          uploader-btn(:attrs="attrs") select images
+        uploader-list
       div(slot="footer")
     Modal(v-model="editModal" @on-ok="onSubmitEdit")
       Tag.img-tag(v-for="item in currentSelectImage.tags", :key="item", :name="item", closable, @on-close="handleCloseTag(item)") {{item}}
       Button(v-if="!currentSelectImage.isAddTag" icon="ios-add" type="dashed" size="small" @click="$set(currentSelectImage, 'isAddTag', true)") 添加标签
       Input(v-if="currentSelectImage.isAddTag" size="small" autofocus style="width: 60px" @on-change="e => {currentSelectImage.addTagText = e.target.value}" @on-enter="handleInputTag" @on-blur="handleInputTag")
+    
+    .toolbox(v-if="this.$refs.waterfall" :style="{color: 'red', width: waterfallWidth + 'px'}")
+      Affix(:offset-top="0" )
+        Card
+          div(slot="title" :style="{display: 'flex', alignItems:'center'}")
+            p 二次元表情包
+            Input(v-model="search" clearable  @on-enter="handleSearch" @on-blur="handleSearch")
+            Button(icon="md-search" @click="handleSearch" )
+            Button(icon="md-add" @click="uploadModal = true")
     div.waterfall-box
       vue-waterfall-easy(:maxCols="5" ref="waterfall" :imgsArr="images.list" srcKey="url" @scrollReachBottom="getImages" @click="clickFn")
         div.img-info(slot-scope="props") 
@@ -18,13 +33,6 @@
           //- div(:style="{display: 'flex', alignItems: 'center'}")
           //-   Icon(type="ios-heart-outline" :size="20")
           //-   span(:style="{'line-height': 1.5, 'margin-left': 5+'px',}") 0
-        Affix(slot="waterfall-head" :offset-top="0")
-          Card
-            div(slot="title" :style="{display: 'flex', alignItems:'center'}")
-              p 二次元表情包
-              Input(v-model="search" clearable  @on-enter="handleSearch" @on-blur="handleSearch")
-              Button(icon="md-search" @click="handleSearch" )
-              Button(icon="md-add" @click="uploadModal = true")
 </template>
 
 <script>
@@ -43,7 +51,15 @@ export default {
         tags: [],
         addTagText: "",
         isAddTag: false
-      }
+      },
+      uploadOptions: {
+          target: `${store.state.apiRoot}/upload`,
+          fileParameterName: "files",
+          testChunks: false
+        },
+        attrs: {
+          accept: 'image/*'
+        }
     };
   },
   watch: {},
@@ -56,8 +72,7 @@ export default {
     },
     ...mapObjs(["images"]),
     waterfallWidth(){
-      const {colWidth, cols} = this.$refs.waterfall
-      return colWidth*cols
+      return this.$refs.waterfall.waterfallWidth
     }
   },
   methods: {
@@ -114,12 +129,16 @@ export default {
 </script>
 
 <style lang="stylus">
+.toolbox {
+  margin: 0 auto;
+  // max-width: 1350px
+}
 .search {
   display: flex;
 }
 .waterfall-box {
   position: absolute;
-  top: 15px;
+  top: 100px;
   bottom: 0;
   width: 100%;
 }
@@ -133,4 +152,21 @@ export default {
   font-size: 12px
 
 }
+
+.uploader-example {
+    width: 880px;
+    padding: 15px;
+    margin: 40px auto 0;
+    font-size: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+  }
+  .uploader-example .uploader-btn {
+    margin-right: 4px;
+  }
+  .uploader-example .uploader-list {
+    max-height: 440px;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 </style>

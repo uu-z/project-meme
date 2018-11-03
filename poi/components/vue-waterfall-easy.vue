@@ -6,8 +6,8 @@
   width: 100%;
   height: 100%;
   position: relative;
-  // overflow-x: hidden;
-  // overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   // -webkit-overflow-scrolling: touch;
   .vue-waterfall-easy-scroll {
     position: relative;
@@ -116,7 +116,7 @@
     slot(name="loading", :isFirstLoad="isFirstLoad")
     .dot(v-if="!hasLoadingSlot", v-for="n in loadingDotCount",:style="loadingDotStyle")
   //- 为了防止loading 跟随滚动
-  .vue-waterfall-easy-scroll(:style="isMobile? '' :{width: colWidth*cols+'px',left:'50%', marginLeft: -1*colWidth*cols/2 +'px'}")
+  .vue-waterfall-easy-scroll(:style="isMobile? '' :{width: colWidth*cols+'px', margin: '0 auto'}")
     slot(name="waterfall-head")
     .vue-waterfall-easy()
       .img-box(
@@ -234,6 +234,9 @@ export default {
     colWidth() { // 每一列的宽度
       return this.imgWidth + this.gap
     },
+    waterfallWidth(){
+      return this.colWidth*this.cols
+    },
     imgWidth_c() { // 对于移动端重新计算图片宽度`
       return this.isMobile ? window.innerWidth / 2 - this.mobileGap : this.imgWidth
     },
@@ -340,12 +343,12 @@ export default {
         if (i < this.cols) {
           this.colsHeightArr.push(height)
           top = 0
-          left = i * colWidth
+          left = i * colWidth + 10
         } else {
           var minHeight = Math.min.apply(null, this.colsHeightArr) // 最低高低
           var minIndex = this.colsHeightArr.indexOf(minHeight) // 最低高度的索引
           top = minHeight
-          left = minIndex * colWidth
+          left = minIndex * colWidth + 10
           // 设置元素定位的位置
           // 更新colsHeightArr
           this.colsHeightArr[minIndex] = minHeight + height
@@ -373,24 +376,17 @@ export default {
 
     // ==5== 滚动触底事件
     scrollFn() {
-      if(window.pageYOffset >= this.reachBottomDistance){
-        // console.log(window.pageYOffset, this.reachBottomDistance)
-        this.reachBottomDistance += window.pageYOffset
-        this.$emit('scrollReachBottom')
+      var scrollEl = this.$refs.scrollEl
+      if (this.isPreloading) return
+      var minHeight = Math.min.apply(null, this.colsHeightArr)
+      if (scrollEl.scrollTop + scrollEl.offsetHeight > minHeight - this.reachBottomDistance) {
+        this.isPreloading = true
+        // console.log('scrollReachBottom')
+        this.$emit('scrollReachBottom') // 滚动触底
       }
-      // var scrollEl = this.$refs.scrollEl
-      // if (this.isPreloading) return
-      // var minHeight = Math.min.apply(null, this.colsHeightArr)
-      // if (scrollEl.scrollTop + scrollEl.offsetHeight > minHeight - this.reachBottomDistance) {
-      //   this.isPreloading = true
-      //   // console.log('scrollReachBottom')
-      //   this.$emit('scrollReachBottom') // 滚动触底
-      // }
     },
     scroll() {
-      // this.$refs.scrollEl.addEventListener('scroll', this.scrollFn)
-      window.addEventListener('scroll', this.scrollFn);
-      window.addEventListener('resize', this.scrollFn);
+      this.$refs.scrollEl.addEventListener('scroll', this.scrollFn)
     },
     waterfallOver() {
       this.$refs.scrollEl.removeEventListener('scroll', this.scrollFn)

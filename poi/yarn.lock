@@ -7712,6 +7712,11 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
   integrity sha512-AA86yKZ5uOKz87/q1UpngEXhbRkaYg1b7HMMVRobNV1IVKqZe8oLIzo6iMocVwZXnYitlGwf2k4ZRLOZlS8oPQ==
 
+vue-infinite-loading@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.npmjs.org/vue-infinite-loading/-/vue-infinite-loading-2.4.0.tgz#30efcd27bfc63fe4d8d9bc71c83fc54ed1e9317c"
+  integrity sha512-9fPhLJkolJOVTBCQUNFtHvqsmFa6u1TSWsY06Jp+shp0kqaBm7FjB2z14Nu3lPOiQSKewA9En2l1f7hOSZBhrg==
+
 vue-loader@^15.2.1:
   version "15.4.2"
   resolved "https://registry.npmjs.org/vue-loader/-/vue-loader-15.4.2.tgz#812bb26e447dd3b84c485eb634190d914ce125e2"

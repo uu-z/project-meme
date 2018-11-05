@@ -2,22 +2,21 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-
 import axios from 'axios'
 
-import iView from 'iview';
+import iview from 'iview';
 import vueWaterfallEasy from './components/vue-waterfall-easy.vue'
 import uploader from 'vue-simple-uploader'
-import InfiniteLoading from 'vue-infinite-loading';
+
+const {Button, Modal, BackTop, Tag, Input,Affix, Card} = iview
 
 const Plugins = {
-    iView,
     uploader
 }
 
 const Components = {
     vueWaterfallEasy,
-    InfiniteLoading
+    Button, Modal, BackTop, Tag, Input,Affix, Card
 }
 
 for (let [key, value] of Object.entries(Components)) {

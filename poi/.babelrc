@@ -1,0 +1,12 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    "poi"
+  ],
+  "plugins": [
+    ["import", {
+      "libraryName": "iview",
+      "libraryDirectory": "src/components"
+    }]
+  ]
+}

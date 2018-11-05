@@ -17,7 +17,6 @@
       Tag.img-tag(v-for="item in currentSelectImage.tags", :key="item", :name="item", closable, @on-close="handleCloseTag(item)") {{item}}
       Button(v-if="!currentSelectImage.isAddTag" icon="ios-add" type="dashed" size="small" @click="$set(currentSelectImage, 'isAddTag', true)") 添加标签
       Input(v-if="currentSelectImage.isAddTag" size="small" autofocus style="width: 60px" @on-change="e => {currentSelectImage.addTagText = e.target.value}" @on-enter="handleInputTag" @on-blur="handleInputTag")
-    
     .toolbox(v-if="this.$refs.waterfall" :style="{color: 'red', width: waterfallWidth + 'px'}")
       Affix(:offset-top="0" )
         Card
@@ -27,7 +26,7 @@
             Button(icon="md-search" @click="handleSearch" )
             Button(icon="md-add" @click="uploadModal = true")
     div.waterfall-box
-      vue-waterfall-easy(:maxCols="5" ref="waterfall" :imgsArr="images.list" srcKey="url" @scrollReachBottom="getImages" @click="clickFn")
+      vue-waterfall-easy(:maxCols="5" :scrollStyle="{'padding-top': '100px'}" ref="waterfall" :imgsArr="images.list" srcKey="url" @scrollReachBottom="getImages" @click="clickFn")
         div.img-info(slot-scope="props") 
           p {{ props.value.tags? props.value.tags.join(",") : ""}}
           //- div(:style="{display: 'flex', alignItems: 'center'}")
@@ -138,9 +137,13 @@ export default {
 }
 .waterfall-box {
   position: absolute;
-  top: 100px;
+  top: 0;
   bottom: 0;
   width: 100%;
+  z-index: -1
+  .vue-waterfall-easy-scroll {
+    padding-top: 100px
+  }
 }
 
 .img-text {

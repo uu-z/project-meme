@@ -37,8 +37,7 @@
     "role": {
       "model": "role",
       "via": "users",
-      "plugin": "users-permissions",
-      "configurable": false
+      "plugin": "users-permissions"
     },
     "avatar": {
       "model": "file",

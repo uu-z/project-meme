@@ -7,12 +7,18 @@
 </template>
 
 <script>
-export default {};
+import store from "./store"
+export default {
+  created(){
+    store.dispatch("INIT_APP")
+  }
+};
 </script>
 
 <style lang="stylus">
 @import url('~iview/dist/styles/iview.css');
+
 body {
-  background: #f5f5f5
+  background: #f5f5f5;
 }
 </style>

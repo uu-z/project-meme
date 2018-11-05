@@ -10,7 +10,7 @@ export default (keys) =>
 			},
 			set(val) {
 				store.commit('CUSTOM', (state) => {
-					let target = _.get(store.state, keys, {});
+					let target = _.get(store.state, key, {});
 					_.set(store.state, key, {
 						...target,
 						...val

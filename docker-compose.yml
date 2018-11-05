@@ -11,7 +11,6 @@ services:
     depends_on:
       - api
     labels:
-      - traefik.enable=true
       - traefik.backend=frontend
       - traefik.frontend.rule=Host:meme.yuyuko.me
       - traefik.docker.network=proxy
@@ -26,14 +25,12 @@ services:
       - DATABASE_NAME=strapi
       - DATABASE_USERNAME=
       - DATABASE_PASSWORD=
-      - NODE_ENV=production
     ports:
       - "1337:1337"
     networks: 
       - proxy
     labels:
-      - traefik.enable=true    
-      - traefik.backend=strapi
+      - traefik.backend=api
       - traefik.frontend.rule=Host:api.yuyuko.me
       - traefik.docker.network=proxy
       - traefik.port=1337

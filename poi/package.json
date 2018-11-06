@@ -12,6 +12,7 @@
     "lodash": "^4.17.11",
     "poi": "^10.2.10",
     "vue": "^2.5.17",
+    "vue-ga": "^1.0.0",
     "vue-infinite-loading": "^2.4.0",
     "vue-router": "^3.0.1",
     "vue-simple-uploader": "^0.5.4",

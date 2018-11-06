@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '../store';
+import ga from 'vue-ga';
+
 
 Vue.use(Router);
 
@@ -33,5 +35,7 @@ router.beforeEach((to, from, next) => {
 
 	next();
 });
+
+ga(router, 'UA-128746837-1');
 
 export default router;

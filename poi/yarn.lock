@@ -7720,6 +7720,11 @@ void-elements@^2.0.1:
   resolved "https://registry.npmjs.org/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
   integrity sha1-wGavtYK7HLQSjWDqkjkulNXp2+w=
 
+vue-ga@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/vue-ga/-/vue-ga-1.0.0.tgz#c890fc529970af10abef2c42c81ea38cfb00cef1"
+  integrity sha1-yJD8UplwrxCr7yxCyB6jjPsAzvE=
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.1"
   resolved "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"

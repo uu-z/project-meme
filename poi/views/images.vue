@@ -22,7 +22,7 @@
             Button(icon="md-search" @click="handleSearch" )
             Button(icon="md-add" @click="handleUpload")
     div.waterfall-box
-      vue-waterfall-easy(:maxCols="5" :scrollStyle="{'padding-top': '100px'}" ref="waterfall" :imgsArr="images.list" srcKey="url" @scrollReachBottom="getImages" @click="clickFn")
+      vue-waterfall-easy(:maxCols="6" :imgWidth="180" :scrollStyle="{'padding-top': '100px'}" ref="waterfall" :imgsArr="images.list" srcKey="url" @scrollReachBottom="getImages" @click="clickFn")
         div.img-info(slot-scope="props") 
           p {{ props.value.tags? props.value.tags.join(",") : ""}}
 </template>
@@ -132,51 +132,51 @@ export default {
 
 <style lang="stylus">
 .toolbox {
-  margin: 0 auto;
-  // max-width: 1350px
+	margin: 0 auto;
+	// max-width: 1350px
 }
 
 .search {
-  display: flex;
+	display: flex;
 }
 
 .waterfall-box {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  z-index: -1;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: -1;
 
-  .vue-waterfall-easy-scroll {
-    padding-top: 100px;
-  }
+	.vue-waterfall-easy-scroll {
+		padding-top: 100px;
+	}
 }
 
 .img-text {
-  word-wrap: break-word;
+	word-wrap: break-word;
 }
 
 .img-info {
-  padding: 10px;
-  font-size: 12px;
+	padding: 10px;
+	font-size: 12px;
 }
 
 .uploader-example {
-  width: 880px;
-  padding: 15px;
-  margin: 40px auto 0;
-  font-size: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+	width: 880px;
+	padding: 15px;
+	margin: 40px auto 0;
+	font-size: 12px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .uploader-example .uploader-btn {
-  margin-right: 4px;
+	margin-right: 4px;
 }
 
 .uploader-example .uploader-list {
-  max-height: 440px;
-  overflow: auto;
-  overflow-x: hidden;
-  overflow-y: auto;
+	max-height: 440px;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 </style>

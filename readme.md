@@ -17,11 +17,5 @@ open http://localhost:1337
 ```
 
 
-### start front project
-
-```bash
-cd frontend
-yarn install && yarn dev
-
-
-```
+### frontend project
+https://github.com/uu-z/project-meme-frontend

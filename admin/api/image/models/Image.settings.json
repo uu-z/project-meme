@@ -1,0 +1,36 @@
+{
+  "connection": "default",
+  "collectionName": "",
+  "info": {
+    "name": "image",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "board": {
+      "model": "board",
+      "via": "image"
+    },
+    "user": {
+      "model": "user",
+      "via": "images",
+      "plugin": "users-permissions"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": true
+    },
+    "tags": {
+      "default": "",
+      "type": "json"
+    },
+    "description": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}

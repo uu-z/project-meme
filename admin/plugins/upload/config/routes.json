@@ -9,14 +9,6 @@
       }
     },
     {
-      "method": "PUT",
-      "path": "/:id/edit",
-      "handler": "Upload.update",
-      "config": {
-        "policies": []
-      }
-    },
-    {
       "method": "GET",
       "path": "/environments",
       "handler": "Upload.getEnvironments",
